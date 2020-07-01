@@ -31,11 +31,30 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Posição não foi editada.", Toast.LENGTH_LONG).show()
         }
 
-        val primeiraPosicaoEditada = Posicao(1, 15.5, 20.6, currentDate)
-        manager.editarPosicao(primeiraPosicaoEditada)
+        val posicaoEditada = Posicao(2, 15.5, 20.6, currentDate)
+        manager.editarPosicao(posicaoEditada)
 
         val posicaoSemId = Posicao(10.0, 10.0, currentDate)
         manager.editarPosicao(posicaoSemId)
+
+//        manager.removerPosicao(posicaoEditada)
+
+//        manager.limparPosicoes()
+
+        val id = 10L
+        val buscarPosicao = manager.obterPosicao(id)
+
+        if (buscarPosicao != null) {
+            Toast.makeText(this, "Posição de ID $id encontrada com sucesso.", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, "Posição de ID $id não foi encontrada.", Toast.LENGTH_LONG).show()
+        }
+
+        val quantidadePosicoes = manager.obterQuantidadePosicoes()
+
+        if (quantidadePosicoes >= 5) {
+            manager.limparPosicoes()
+        }
 
         val posicoes = manager.obterPosicoes()
 
