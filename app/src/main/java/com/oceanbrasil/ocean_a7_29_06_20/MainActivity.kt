@@ -1,6 +1,7 @@
 package com.oceanbrasil.ocean_a7_29_06_20
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.oceanbrasil.ocean_a7_29_06_20.db.DatabaseHelper
 import com.oceanbrasil.ocean_a7_29_06_20.db.DatabaseManager
@@ -22,6 +23,19 @@ class MainActivity : AppCompatActivity() {
 
         val novaPosicao = Posicao(15.5, 10.2, currentDate)
         manager.criarPosicao(novaPosicao)
+
+        novaPosicao.latitude = 50.2
+        val posicaoEditadaComSucesso = manager.editarPosicao(novaPosicao)
+
+        if (!posicaoEditadaComSucesso) {
+            Toast.makeText(this, "Posição não foi editada.", Toast.LENGTH_LONG).show()
+        }
+
+        val primeiraPosicaoEditada = Posicao(1, 15.5, 20.6, currentDate)
+        manager.editarPosicao(primeiraPosicaoEditada)
+
+        val posicaoSemId = Posicao(10.0, 10.0, currentDate)
+        manager.editarPosicao(posicaoSemId)
 
         val posicoes = manager.obterPosicoes()
 

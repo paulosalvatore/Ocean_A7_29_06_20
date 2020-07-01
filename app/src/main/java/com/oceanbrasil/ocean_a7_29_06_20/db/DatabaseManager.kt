@@ -43,4 +43,23 @@ class DatabaseManager(val helper: DatabaseHelper) {
 
         return posicoes
     }
+
+    fun editarPosicao(posicao: Posicao): Boolean {
+        if (posicao.id == null) {
+            return false
+        }
+
+        val db = helper.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put("latitude", posicao.latitude)
+        contentValues.put("longitude", posicao.longitude)
+        contentValues.put("data_hora", posicao.dataHora)
+
+        db.update("posicoes", contentValues, "id = ?", arrayOf(posicao.id.toString()))
+
+        db.close()
+
+        return true
+    }
 }
