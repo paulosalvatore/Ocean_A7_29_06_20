@@ -37,9 +37,9 @@ class DatabaseManager(val helper: DatabaseHelper) {
                 val posicao = Posicao(id, latitude, longitude, dataHora)
                 posicoes.add(posicao)
             } while (cursor.moveToNext())
-
-            db.close()
         }
+
+        db.close()
 
         return posicoes
     }
